@@ -14,6 +14,7 @@ const Input = styled.select`
 	font-weight: normal;
 	font-size: inherit;
 	cursor: pointer;
+	width: 100%;
 `;
 
 const Option = styled.option`
@@ -32,6 +33,7 @@ const Select: SelectComponent = ({
 	options,
 	onChange = () => {},
 	label,
+	className,
 }) => {
 	function handleChange (event: React.ChangeEvent<HTMLSelectElement>) {
 		const newValue = event.target.value;
@@ -39,7 +41,7 @@ const Select: SelectComponent = ({
 	}
 
 	return (
-		<Root>
+		<Root className={className}>
 			<Label>{label}</Label>
 			<Input onChange={handleChange}>
 				<Option value=''></Option>
