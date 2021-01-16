@@ -1,13 +1,11 @@
 import React from 'react';
 import type { DocumentContext } from 'next/document';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
-import { ServerStyleSheet as StyledComponentServerStyleSheet } from 'styled-components';
-import { ServerStyleSheets as MaterialServerStyleSheet } from '@material-ui/core/styles';
+import { ServerStyleSheet } from 'styled-components';
 
 export default class MyDocument extends Document {
 	public static async getInitialProps (ctx: DocumentContext) {
-		const styledComponentsSheet = new StyledComponentServerStyleSheet();
-		const materialUiSheet = new MaterialServerStyleSheet();
+		const sheet = new ServerStyleSheet();
 		const originalRenderPage = ctx.renderPage;
 
 		try {
@@ -15,23 +13,20 @@ export default class MyDocument extends Document {
 				originalRenderPage({
 					enhanceApp: App =>
 						props =>
-							styledComponentsSheet.collectStyles(
-								materialUiSheet.collect(<App {...props} />)
-							),
+							sheet.collectStyles(<App {...props} />),
 				});
 			const initialProps = await Document.getInitialProps(ctx);
 			return {
 				...initialProps,
 				styles:
-					<>
-						{initialProps.styles}
-						{styledComponentsSheet.getStyleElement()}
-						{materialUiSheet.getStyleElement()}
-					</>
+	<>
+		{initialProps.styles}
+		{sheet.getStyleElement()}
+	</>
 				,
 			};
 		} finally {
-			styledComponentsSheet.seal();
+			sheet.seal();
 		}
 	}
 
