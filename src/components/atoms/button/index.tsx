@@ -9,7 +9,8 @@ const Button = styled.button`
 	justify-content: center;
 	border-radius: 42px;
 	border: 1px solid ${props => props.theme.colors.primary.main};
-	color: ${props => props.theme.colors.primary.main}
+	color: ${props => props.theme.colors.primary.main};
+	font-weight: bold;
 `;
 
 export default Button;
