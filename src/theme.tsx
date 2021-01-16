@@ -60,12 +60,11 @@ declare module "styled-components" {
 		/** Color-related stuff, for pages with primary and secondary colors. */
 		colors: {
 			primary: GradientColor,
-			secondary: GradientColor,
-
-			/** Sometimes, pages will have a color dedicated to objects that should
-			* attract the user's attention, like a call-to-action button on a landing page.
-			* This is the Action color. */
-			action: GradientColor,
+			yellow: GradientColor,
+			orange: GradientColor,
+			pink: GradientColor,
+			green: GradientColor,
+			blue: GradientColor,
 
 			success: GradientColor,
 			error: GradientColor,
@@ -126,15 +125,36 @@ const theme: DefaultTheme = {
 			light: EMPTY_COLOR,
 			lighter: EMPTY_COLOR,
 		},
-		secondary: {
-			main: EMPTY_COLOR,
+		yellow: {
+			main: '#FFB800',
 			dark: EMPTY_COLOR,
 			darker: EMPTY_COLOR,
 			light: EMPTY_COLOR,
 			lighter: EMPTY_COLOR,
 		},
-		action: {
-			main: EMPTY_COLOR,
+		orange: {
+			main: '#FF7201',
+			dark: EMPTY_COLOR,
+			darker: EMPTY_COLOR,
+			light: EMPTY_COLOR,
+			lighter: EMPTY_COLOR,
+		},
+		pink: {
+			main: '#EF1466',
+			dark: EMPTY_COLOR,
+			darker: EMPTY_COLOR,
+			light: EMPTY_COLOR,
+			lighter: EMPTY_COLOR,
+		},
+		green: {
+			main: '#00B33E',
+			dark: EMPTY_COLOR,
+			darker: EMPTY_COLOR,
+			light: EMPTY_COLOR,
+			lighter: EMPTY_COLOR,
+		},
+		blue: {
+			main: '#008AD4',
 			dark: EMPTY_COLOR,
 			darker: EMPTY_COLOR,
 			light: EMPTY_COLOR,
@@ -143,7 +163,7 @@ const theme: DefaultTheme = {
 		gray: {
 			light: `#eeeeee`,
 			lighter: EMPTY_COLOR,
-			main: EMPTY_COLOR,
+			main: '#C4C4C4',
 			dark: EMPTY_COLOR,
 			darker: EMPTY_COLOR,
 		},
