@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import Button from '../../components/button';
-import Select from '../../components/select';
+import Button from '../../components/atoms/button';
+import Select from '../../components/atoms/select';
 
 const Root = styled.div`
 	background-color: ${props => props.theme.colors.gray.light};
