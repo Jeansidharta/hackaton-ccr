@@ -2,6 +2,9 @@
 import React from 'react';
 import Head from 'next/head';
 
+// Misc
+import FilledThemeProvider from '../theme';
+
 type MyAppProps = React.PropsWithoutRef<{
 	Component: any,
 	pageProps: any,
@@ -30,7 +33,9 @@ const MyApp: MyAppComponent = ({ Component, pageProps }) => {
 				<link rel='icon' href='/favicon.ico' type='image/x-icon' />
 			</Head>
 
-			<Component {...pageProps} />
+			<FilledThemeProvider>
+				<Component {...pageProps} />
+			</FilledThemeProvider>
 		</>
 	);
 };
