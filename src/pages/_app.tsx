@@ -5,6 +5,8 @@ import Head from 'next/head';
 // Misc
 import FilledThemeProvider from '../theme';
 import AppContainer from '../containers/_app';
+import Services from '../services';
+import Context from '../contexts';
 
 type MyAppProps = React.PropsWithoutRef<{
 	Component: any,
@@ -40,9 +42,12 @@ const MyApp: MyAppComponent = ({ Component, pageProps }) => {
 			</Head>
 
 			<FilledThemeProvider>
-				<AppContainer>
-					<Component {...pageProps} />
-				</AppContainer>
+				<Context>
+					<Services />
+					<AppContainer>
+						<Component {...pageProps} />
+					</AppContainer>
+				</Context>
 			</FilledThemeProvider>
 		</>
 	);
