@@ -33,8 +33,6 @@ const Select: SelectComponent = ({
 	onChange = () => {},
 	label,
 }) => {
-	const [value, setValue] = React.useState('');
-
 	function handleChange (event: React.ChangeEvent<HTMLSelectElement>) {
 		const newValue = event.target.value;
 		onChange(newValue);
