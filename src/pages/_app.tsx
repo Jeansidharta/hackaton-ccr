@@ -22,13 +22,15 @@ const MyApp: MyAppComponent = ({ Component, pageProps }) => {
 					body, html, #__next {
 						height: 100%;
 						margin: 0;
+						font-family: 'Roboto', sans-serif;
 					}
 					* {
 						box-sizing: border-box;
 					}
 				`}
 				</style>
-
+				<link rel="preconnect" href="https://fonts.gstatic.com" />
+				<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet" />
 				{/* Favicon related stuff */}
 				<link rel='shortcut icon' href='/favicon.ico' type='image/x-icon' />
 				<link rel='icon' href='/favicon.ico' type='image/x-icon' />
