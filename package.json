@@ -10,8 +10,8 @@
   "dependencies": {
     "@types/styled-components": "^5.1.7",
     "next": "10.0.5",
-    "react": "17.0.1",
-    "react-dom": "17.0.1",
+    "react": "0.0.0-8e5adfbd7",
+    "react-dom": "0.0.0-8e5adfbd7",
     "react-toastify": "^6.2.0",
     "styled-components": "^5.2.1"
   },
