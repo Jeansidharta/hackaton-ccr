@@ -33,7 +33,7 @@ const HeaderText = styled.p`
 	width: 100%;
 	text-align: justify;
 	margin-top: 0;
-	font-size: 16px;
+	font-size: 18px;
 `;
 
 const Card = styled.div`
@@ -95,11 +95,17 @@ const ActionButtonsContainer = styled.div`
 
 const StyledSelect = styled(Select)`
 	width: 100%;
+	margin-bottom: 24px;
+	display: block;
 `;
 
 const StyledCheckbox = styled(Checkbox)`
 	margin-bottom: 16px;
-	width: max-content;
+	width: 100%;
+	align-items: flex-start;
+`;
+
+const SelectContainer = styled.div`
 `;
 
 const SelectCategory = [
@@ -212,27 +218,27 @@ const FormPage: FormPageComponent = ({  }) => {
 			</ExclusionCategoriesContainer>
 			<MainContent>
 				<HeaderText>
-					Reserve um momento para refletir sobre as suas experiências pessoais
-					dentro do ambiente de trabalho. Houve alguma ocasião em que sentiu um
-					tratamento diferente? Já passou por algum momento de exclusão no ambiente
-					de trabalho? Ou muito pelo contrário, você pode ter experenciado ocasiões
-					muito especiais dentro da empresa em que trabalha. Esse ambiente foi
-					projetado para que você possa se expressar livremente e com segurança.
-					Lembre-se de selecionar pelo menos uma Categoria e uma Fonte nos menus
-					laterais antes de enviar sua experiência. É possível enviar quantas
-					respostas desejar. Ao finalizar, clique em “Sair”.
+					Esse ambiente foi projetado para que você possa se expressar livremente
+					e com segurança. Reserve um momento para refletir sobre suas experiências
+					pessoais no ambiente de trabalho. Você pode relatar momentos de dificildade,
+					exclusão, assim como ocasiões especiais. Lembre-se de selecionar pelo menos
+					uma Categoria em que sua experiência se encaixa, e uma Fonte nos menus
+					laterais antes de enviar sua experiência. É possível enviar quantas respostas
+					desejar.
 				</HeaderText>
 				<Card>
 					<CardTitle>Experiência pessoal</CardTitle>
 					<Hr />
-					<StyledCheckbox>
-						Este é o meu primeiro emprego, estágio ou programa de treinee.
-					</StyledCheckbox>
 					<Form onSubmit={handleSubmit}>
 						<TextArea name='message' placeholder='Por favor, descreva sua experiência...' />
 						<ControlArea>
-							<StyledSelect onChange={setCategory} fullWidth options={SelectCategory} />
-							<StyledSelect onChange={setSource} fullWidth options={SelectFontes} />
+							<SelectContainer>
+								<StyledSelect onChange={setCategory} fullWidth options={SelectCategory} />
+								<StyledSelect onChange={setSource} fullWidth options={SelectFontes} />
+								<StyledCheckbox>
+									Este é o meu primeiro emprego, estágio ou programa de treinee.
+								</StyledCheckbox>
+							</SelectContainer>
 							<ActionButtonsContainer>
 								<ActionButton type='submit' loading={loading}>Enviar</ActionButton>
 								<ActionButton type='button' onClick={handleExit}>Sair</ActionButton>

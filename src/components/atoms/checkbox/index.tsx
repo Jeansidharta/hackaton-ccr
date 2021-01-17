@@ -13,17 +13,16 @@ const Label = styled.label`
 `;
 
 type CheckboxProps = React.PropsWithChildren<{
-	className?: string;
-}>;
+}> & React.ComponentProps<'label'>;
 
 type CheckboxComponent = React.FunctionComponent<CheckboxProps>;
 
 const Checkbox: CheckboxComponent = ({
 	children,
-	className,
+	...props
 }) => {
 	return (
-		<Label className={className}>
+		<Label {...props}>
 			<Input />
 			{children}
 		</Label>
