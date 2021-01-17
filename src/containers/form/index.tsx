@@ -144,11 +144,9 @@ function initializeDictExclusionCategory<T> (initialValue: T | (() => T)) {
 function groupExclusionReports (reports: ExclusionReport[]) {
 	const dict = initializeDictExclusionCategory<ExclusionReport[]>(() => []);
 
-	console.log('start', dict);
 	reports.forEach(report => {
 		dict[report.category].push(report);
 	});
-	console.log('end', dict);
 
 	return dict;
 }
@@ -229,6 +227,10 @@ const FormPage: FormPageComponent = ({  }) => {
 		if (!success) return;
 
 		setExclusionReports([...exclusionReports, report ]);
+		setExclusionReportsLength({
+			...exclusionReportsLength,
+			[report.category]: exclusionReportsLength[report.category] + 1,
+		});
 		toast.success('Experiência enviada com sucesso!');
 	}
 
