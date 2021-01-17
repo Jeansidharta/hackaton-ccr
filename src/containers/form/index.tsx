@@ -173,8 +173,8 @@ const FormPage: FormPageComponent = ({  }) => {
 					<Form>
 						<TextArea placeholder='Por favor, descreva sua experiência...' />
 						<ControlArea>
-							<StyledSelect options={SelectCategory} />
-							<StyledSelect options={SelectFontes} />
+							<StyledSelect fullWidth options={SelectCategory} />
+							<StyledSelect fullWidth options={SelectFontes} />
 							<ActionButtonsContainer>
 								<ActionButton>Enviar</ActionButton>
 								<ActionButton>Sair</ActionButton>

@@ -1,7 +1,10 @@
 import React from 'react';
+import { toast } from 'react-toastify';
 import styled from 'styled-components';
+import usePostData from '../../api/post-data';
 import Button from '../../components/atoms/button';
 import Select from '../../components/atoms/select';
+import { useRouter } from 'next/router';
 
 const Root = styled.div`
 	background-color: ${props => props.theme.colors.gray.light};
@@ -31,6 +34,10 @@ const ContinueButton = styled(Button)`
 	margin: 47px 0 0 auto;
 	font-size: 36px;
 	padding: 22px 66px;
+`;
+
+const StyledSelect = styled(Select)`
+	width: max-content;
 `;
 
 type IndexProps = React.PropsWithoutRef<{
@@ -99,15 +106,51 @@ const satisfaction = [
 	'muito alto',
 ];
 
+type FormData = {
+	race: string,
+	sexuality: string,
+	gender: string,
+	transgender: string,
+	ageGroup: string,
+	deficiency: string,
+	workTime: string,
+	satisfaction: string,
+};
+
 const Index: IndexComponent = ({  }) => {
-	const RaceSelect = <Select options={race} />;
-	const SexualitySelect = <Select options={sexuality} />;
-	const GenderSelect = <Select options={gender} />;
-	const TransgenderSelect = <Select options={transgender} />;
-	const AgeGroupSelect = <Select options={ageGroup} />;
-	const DeficiencySelect = <Select options={deficiency} />;
-	const WorkTimeSelect = <Select options={workTime} />;
-	const SatisfactionSelect = <Select options={satisfaction} />;
+	const router = useRouter();
+
+	const [data, setData] = React.useState<Partial<FormData>>({});
+	const [postSubmit, { loading, error, responseData }] = usePostData({});
+
+	React.useEffect(() => {
+		if (loading) return;
+		else if (error) toast.error(error.message);
+		else if (responseData) toast.success('Dados enviados com sucesso');
+	}, [loading, responseData, error]);
+
+	async function handleSubmit () {
+		const response = await postSubmit(data);
+		if (!response) return;
+		router.push('/form');
+	}
+
+	function handleSelectChange (dataKey: keyof FormData, value: string) {
+		setData({ ...data, [dataKey]: value });
+	}
+
+	const makeHandler = (dataKey: keyof FormData) => {
+		return (value: string) => handleSelectChange(dataKey, value);
+	};
+
+	const RaceSelect = <StyledSelect onChange={makeHandler('race')} options={race} />;
+	const SexualitySelect = <StyledSelect onChange={makeHandler('sexuality')} options={sexuality} />;
+	const GenderSelect = <StyledSelect onChange={makeHandler('gender')} options={gender} />;
+	const TransgenderSelect = <StyledSelect onChange={makeHandler('transgender')} options={transgender} />;
+	const AgeGroupSelect = <StyledSelect onChange={makeHandler('ageGroup')} options={ageGroup} />;
+	const DeficiencySelect = <StyledSelect onChange={makeHandler('deficiency')} options={deficiency} />;
+	const WorkTimeSelect = <StyledSelect onChange={makeHandler('workTime')} options={workTime} />;
+	const SatisfactionSelect = <StyledSelect onChange={makeHandler('satisfaction')} options={satisfaction} />;
 
 	return (
 		<Root>
@@ -119,7 +162,9 @@ const Index: IndexComponent = ({  }) => {
 				há {WorkTimeSelect} ano(s), e o meu nível de satisfação com o trabalho
 				atualmente é {SatisfactionSelect}
 			</Card>
-			<ContinueButton>Continuar</ContinueButton>
+			<ContinueButton onClick={handleSubmit} loading={loading}>
+				Continuar
+			</ContinueButton>
 		</Root>
 	);
 }
