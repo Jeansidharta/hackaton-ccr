@@ -129,6 +129,10 @@ const Index: IndexComponent = ({  }) => {
 		else if (responseData) toast.success('Dados enviados com sucesso');
 	}, [loading, responseData, error]);
 
+	React.useEffect(() => {
+		router.prefetch('/form');
+	}, []);
+
 	async function handleSubmit () {
 		const response = await postSubmit(data);
 		if (!response) return;
