@@ -10,11 +10,11 @@ const Label = styled.label`
 	font-weight: normal;
 `;
 
-const Input = styled.select`
+const Input = styled.select<{ fullWidth: boolean }>`
 	font-weight: normal;
 	font-size: inherit;
 	cursor: pointer;
-	width: 100%;
+	width: ${props => props.fullWidth ? '100%' : ''};
 `;
 
 const Option = styled.option`
@@ -24,6 +24,7 @@ type SelectProps = React.PropsWithoutRef<{
 	options: ({ text: string, value: string } | string)[],
 	onChange?: (newValue: string) => void,
 	label?: string,
+	fullWidth?: boolean,
 	className?: string,
 }>;
 
@@ -34,6 +35,7 @@ const Select: SelectComponent = ({
 	onChange = () => {},
 	label,
 	className,
+	fullWidth = false,
 }) => {
 	function handleChange (event: React.ChangeEvent<HTMLSelectElement>) {
 		const newValue = event.target.value;
@@ -43,7 +45,7 @@ const Select: SelectComponent = ({
 	return (
 		<Root className={className}>
 			<Label>{label}</Label>
-			<Input onChange={handleChange}>
+			<Input onChange={handleChange} fullWidth={fullWidth}>
 				<Option value=''></Option>
 				{options.map(option => {
 					if (typeof option === 'string') {
