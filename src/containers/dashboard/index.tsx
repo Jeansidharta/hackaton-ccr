@@ -1,5 +1,7 @@
 import React from 'react';
 import styled, { DefaultTheme } from 'styled-components';
+import { useLocalStorage } from '../../libs/hooks/use-local-storage';
+import { useReportsData } from './use-reports-data';
 
 const Root = styled.div`
 	padding: 16px;
@@ -61,6 +63,8 @@ type DashboardProps = React.PropsWithoutRef<{
 type DashboardComponent = React.FunctionComponent<DashboardProps>;
 
 const Dashboard: DashboardComponent = ({  }) => {
+	const { reportsAmmount } = useReportsData();
+
 	return (
 		<Root>
 			<Title>Métricas com foco em inclusão da empresa Xis</Title>
@@ -85,63 +89,63 @@ const Dashboard: DashboardComponent = ({  }) => {
 
 				{/* Respeito */}
 				<Cell color='yellow'>Respeito</Cell>
-				<Cell color='yellow'>14</Cell>
-				<Cell color='yellow'>50*</Cell>
-				<Cell color='yellow'>50*</Cell>
-				<Cell color='yellow'>17*</Cell>
-				<Cell color='yellow'>3</Cell>
-				<Cell color='yellow'>12*</Cell>
-				<Cell color='yellow'>3*</Cell>
+				<Cell color='yellow'>{reportsAmmount.Respeito['Políticas da Empresa']}</Cell>
+				<Cell color='yellow'>{reportsAmmount.Respeito.Lideranças}*</Cell>
+				<Cell color='yellow'>{reportsAmmount.Respeito.RH}*</Cell>
+				<Cell color='yellow'>{reportsAmmount.Respeito.Colaboradores}*</Cell>
+				<Cell color='yellow'>{reportsAmmount.Respeito['Avaliações de Desempenho']}</Cell>
+				<Cell color='yellow'>{reportsAmmount.Respeito['Clientes / Parceiros']}*</Cell>
+				<Cell color='yellow'>{reportsAmmount.Respeito.Outro}*</Cell>
 
 				{/* Aprendizagem e Crescimento */}
 				<Cell color='orange'>Aprendizagem e Crescimento</Cell>
-				<Cell color='orange'>14</Cell>
-				<Cell color='orange'>50*</Cell>
-				<Cell color='orange'>50*</Cell>
-				<Cell color='orange'>17*</Cell>
-				<Cell color='orange'>3</Cell>
-				<Cell color='orange'>12*</Cell>
-				<Cell color='orange'>3*</Cell>
+				<Cell color='orange'>{reportsAmmount['Aprendizagem e Crescimento']['Políticas da Empresa']}</Cell>
+				<Cell color='orange'>{reportsAmmount['Aprendizagem e Crescimento'].Lideranças}*</Cell>
+				<Cell color='orange'>{reportsAmmount['Aprendizagem e Crescimento'].RH}*</Cell>
+				<Cell color='orange'>{reportsAmmount['Aprendizagem e Crescimento'].Colaboradores}*</Cell>
+				<Cell color='orange'>{reportsAmmount['Aprendizagem e Crescimento']['Avaliações de Desempenho']}</Cell>
+				<Cell color='orange'>{reportsAmmount['Aprendizagem e Crescimento']['Clientes / Parceiros']}*</Cell>
+				<Cell color='orange'>{reportsAmmount['Aprendizagem e Crescimento'].Outro}*</Cell>
 
 				{/* Equilíbrio entre vida pessoal e profissional */}
 				<Cell color='pink'>Equilíbrio entre vida pessoal e profissional</Cell>
-				<Cell color='pink'>14</Cell>
-				<Cell color='pink'>50*</Cell>
-				<Cell color='pink'>50*</Cell>
-				<Cell color='pink'>17*</Cell>
-				<Cell color='pink'>3</Cell>
-				<Cell color='pink'>12*</Cell>
-				<Cell color='pink'>3*</Cell>
+				<Cell color='pink'>{reportsAmmount['Equilíbrio entre vida pessoal e profissional']['Políticas da Empresa']}</Cell>
+				<Cell color='pink'>{reportsAmmount['Equilíbrio entre vida pessoal e profissional'].Lideranças}*</Cell>
+				<Cell color='pink'>{reportsAmmount['Equilíbrio entre vida pessoal e profissional'].RH}*</Cell>
+				<Cell color='pink'>{reportsAmmount['Equilíbrio entre vida pessoal e profissional'].Colaboradores}*</Cell>
+				<Cell color='pink'>{reportsAmmount['Equilíbrio entre vida pessoal e profissional']['Avaliações de Desempenho']}</Cell>
+				<Cell color='pink'>{reportsAmmount['Equilíbrio entre vida pessoal e profissional']['Clientes / Parceiros']}*</Cell>
+				<Cell color='pink'>{reportsAmmount['Equilíbrio entre vida pessoal e profissional'].Outro}*</Cell>
 
 				{/* Oportunidades de Carreira */}
 				<Cell color='green'>Oportunidades de Carreira</Cell>
-				<Cell color='green'>14</Cell>
-				<Cell color='green'>50*</Cell>
-				<Cell color='green'>50*</Cell>
-				<Cell color='green'>17*</Cell>
-				<Cell color='green'>3</Cell>
-				<Cell color='green'>12*</Cell>
-				<Cell color='green'>3*</Cell>
+				<Cell color='green'>{reportsAmmount['Oportunidades de carreira']['Políticas da Empresa']}</Cell>
+				<Cell color='green'>{reportsAmmount['Oportunidades de carreira'].Lideranças}*</Cell>
+				<Cell color='green'>{reportsAmmount['Oportunidades de carreira'].RH}*</Cell>
+				<Cell color='green'>{reportsAmmount['Oportunidades de carreira'].Colaboradores}*</Cell>
+				<Cell color='green'>{reportsAmmount['Oportunidades de carreira']['Avaliações de Desempenho']}</Cell>
+				<Cell color='green'>{reportsAmmount['Oportunidades de carreira']['Clientes / Parceiros']}*</Cell>
+				<Cell color='green'>{reportsAmmount['Oportunidades de carreira'].Outro}*</Cell>
 
 				{/* Elogio */}
 				<Cell color='blue'>Elogio</Cell>
-				<Cell color='blue'>14</Cell>
-				<Cell color='blue'>50*</Cell>
-				<Cell color='blue'>50*</Cell>
-				<Cell color='blue'>17*</Cell>
-				<Cell color='blue'>3</Cell>
-				<Cell color='blue'>12*</Cell>
-				<Cell color='blue'>3*</Cell>
+				<Cell color='blue'>{reportsAmmount.Elogio['Políticas da Empresa']}</Cell>
+				<Cell color='blue'>{reportsAmmount.Elogio.Lideranças}*</Cell>
+				<Cell color='blue'>{reportsAmmount.Elogio.RH}*</Cell>
+				<Cell color='blue'>{reportsAmmount.Elogio.Colaboradores}*</Cell>
+				<Cell color='blue'>{reportsAmmount.Elogio['Avaliações de Desempenho']}</Cell>
+				<Cell color='blue'>{reportsAmmount.Elogio['Clientes / Parceiros']}*</Cell>
+				<Cell color='blue'>{reportsAmmount.Elogio.Outro}*</Cell>
 
 				{/* Outro */}
 				<Cell color='gray'>Outro</Cell>
-				<Cell color='gray'>14</Cell>
-				<Cell color='gray'>50*</Cell>
-				<Cell color='gray'>50*</Cell>
-				<Cell color='gray'>17*</Cell>
-				<Cell color='gray'>3</Cell>
-				<Cell color='gray'>12*</Cell>
-				<Cell color='gray'>3*</Cell>
+				<Cell color='gray'>{reportsAmmount.Outro['Políticas da Empresa']}</Cell>
+				<Cell color='gray'>{reportsAmmount.Outro.Lideranças}*</Cell>
+				<Cell color='gray'>{reportsAmmount.Outro.RH}*</Cell>
+				<Cell color='gray'>{reportsAmmount.Outro.Colaboradores}*</Cell>
+				<Cell color='gray'>{reportsAmmount.Outro['Avaliações de Desempenho']}</Cell>
+				<Cell color='gray'>{reportsAmmount.Outro['Clientes / Parceiros']}*</Cell>
+				<Cell color='gray'>{reportsAmmount.Outro.Outro}*</Cell>
 			</Grid>
 			<Observation>
 				* Categorias que contém experiências de colaboradores no 1º emprego, estágio ou programa de treinee.
