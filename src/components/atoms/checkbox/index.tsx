@@ -13,17 +13,25 @@ const Label = styled.label`
 `;
 
 type CheckboxProps = React.PropsWithChildren<{
-}> & React.ComponentProps<'label'>;
+	onChange?: (value: boolean) => void,
+}> & Omit<React.ComponentProps<'label'>, 'onChange'>;
 
 type CheckboxComponent = React.FunctionComponent<CheckboxProps>;
 
 const Checkbox: CheckboxComponent = ({
 	children,
+	ref,
+	onChange = () => {},
 	...props
 }) => {
+	function handleChange (event: React.ChangeEvent<HTMLInputElement>) {
+		const value = event.target.checked;
+		onChange(value);
+	}
+
 	return (
 		<Label {...props}>
-			<Input />
+			<Input onChange={handleChange} />
 			{children}
 		</Label>
 	);
