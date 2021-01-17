@@ -22,7 +22,7 @@ const Option = styled.option`
 
 type SelectProps = React.PropsWithoutRef<{
 	options: ({ text: string, value: string } | string)[],
-	onChange?: (newValue: string) => void,
+	onChange?: (newValue: string | null) => void,
 	label?: string,
 	fullWidth?: boolean,
 	className?: string,
@@ -39,7 +39,7 @@ const Select: SelectComponent = ({
 }) => {
 	function handleChange (event: React.ChangeEvent<HTMLSelectElement>) {
 		const newValue = event.target.value;
-		onChange(newValue);
+		onChange(newValue === '' ? null : newValue);
 	}
 
 	return (

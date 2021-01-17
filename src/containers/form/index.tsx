@@ -6,7 +6,9 @@ import usePostData from '../../api/post-data';
 import Button from '../../components/atoms/button';
 import Checkbox from '../../components/atoms/checkbox';
 import Select from '../../components/atoms/select';
-import ExclusionCategory from './exclusion-category';
+import { useLocalStorage } from '../../libs/hooks/use-local-storage';
+import { ExclusionCategory, ExclusionReport, ExclusionSource } from '../../models/exclusion-report';
+import ExclusionCard from './exclusion-card';
 
 const Root = styled.div`
 	display: flex;
@@ -108,7 +110,7 @@ const StyledCheckbox = styled(Checkbox)`
 const SelectContainer = styled.div`
 `;
 
-const SelectCategory = [
+const SelectCategory: ExclusionCategory[] = [
 	'Respeito',
 	'Aprendizagem e Crescimento',
 	'Equilíbrio entre vida pessoal e profissional',
@@ -117,7 +119,7 @@ const SelectCategory = [
 	'Outro',
 ];
 
-const SelectFontes = [
+const SelectFontes: ExclusionSource[] = [
 	'Políticas da Empresa',
 	'Lideranças',
 	'RH',
@@ -132,11 +134,43 @@ type FormPageProps = React.PropsWithoutRef<{
 
 type FormPageComponent = React.FunctionComponent<FormPageProps>;
 
+function initializeDictExclusionCategory<T> (initialValue: T | (() => T)) {
+	const dict: Record<ExclusionCategory, T> = Object.create(null) as any;
+	const getInitialValue = () => initialValue instanceof Function ? initialValue() : initialValue;
+	ExclusionCategory.forEach(category => { dict[category] = getInitialValue() });
+	return dict;
+}
+
+function groupExclusionReports (reports: ExclusionReport[]) {
+	const dict = initializeDictExclusionCategory<ExclusionReport[]>(() => []);
+
+	reports.forEach(report => {
+		dict[report.category].push(report);
+	});
+
+	return dict;
+}
+
+function generateExclusionReportsLength (min: number, max: number) {
+	const dict = initializeDictExclusionCategory(0);
+	for (const key of Object.keys(dict) as ExclusionCategory[]) {
+		dict[key] = Math.floor(Math.random() * (max - min) + min);
+	}
+	return dict;
+}
+
 const FormPage: FormPageComponent = ({  }) => {
-	const [category, setCategory] = React.useState<string | null>(null);
-	const [source, setSource] = React.useState<string | null>(null);
+	const [category, setCategory] = React.useState<ExclusionCategory | null>(null);
+	const [source, setSource] = React.useState<ExclusionSource | null>(null);
+	const [isFirstJob, setIsFirstJob] = React.useState<boolean>(false);
 
 	const [postData, { error, loading }] = usePostData({});
+
+	const [exclusionReports, setExclusionReports] = useLocalStorage<ExclusionReport[]>('my-exclusion-reports', []);
+	const [exclusionReportsLength, setExclusionReportsLength] = useLocalStorage<Record<ExclusionCategory, number>>(
+		'categories-numbers',
+		() => generateExclusionReportsLength(100, 300),
+	);
 
 	React.useEffect(() => {
 		if (error) toast.error(error.message);
@@ -182,38 +216,64 @@ const FormPage: FormPageComponent = ({  }) => {
 			return;
 		}
 
-		const success = await postData({ message, source, category });
+		const report: ExclusionReport = {
+			message,
+			category: category!,
+			source: source!,
+			isFirstJob: isFirstJob!,
+		};
+
+		const success = await postData(report);
 		if (!success) return;
 
+		setExclusionReports([...exclusionReports, report ]);
+		setExclusionReportsLength({
+			...exclusionReportsLength,
+			[report.category]: exclusionReportsLength[report.category] + 1,
+		});
 		toast.success('Experiência enviada com sucesso!');
 	}
+
+	const groupedReports = groupExclusionReports(exclusionReports);
 
 	return (
 		<Root>
 			<ExclusionCategoriesContainer>
-				<ExclusionCategory
-					name='Respeito'
+				<ExclusionCard
+					category='Respeito'
 					color={theme => theme.colors.yellow.main}
+					mySubmissions={groupedReports.Respeito.length}
+					totalSubmissions={exclusionReportsLength.Elogio}
 				/>
-				<ExclusionCategory
-					name='Aprendizagem e Crescimento'
+				<ExclusionCard
+					category='Aprendizagem e Crescimento'
 					color={theme => theme.colors.orange.main}
+					mySubmissions={groupedReports['Aprendizagem e Crescimento'].length}
+					totalSubmissions={exclusionReportsLength['Aprendizagem e Crescimento']}
 				/>
-				<ExclusionCategory
-					name='Equilibrio entre vida pessoal e profissional'
+				<ExclusionCard
+					category='Equilíbrio entre vida pessoal e profissional'
 					color={theme => theme.colors.pink.main}
+					mySubmissions={groupedReports['Equilíbrio entre vida pessoal e profissional'].length}
+					totalSubmissions={exclusionReportsLength['Equilíbrio entre vida pessoal e profissional']}
 				/>
-				<ExclusionCategory
-					name='Oportunidades de carreira'
+				<ExclusionCard
+					category='Oportunidades de carreira'
 					color={theme => theme.colors.green.main}
+					mySubmissions={groupedReports['Oportunidades de carreira'].length}
+					totalSubmissions={exclusionReportsLength['Oportunidades de carreira']}
 				/>
-				<ExclusionCategory
-					name='Elogio'
+				<ExclusionCard
+					category='Elogio'
 					color={theme => theme.colors.blue.main}
+					mySubmissions={groupedReports.Elogio.length}
+					totalSubmissions={exclusionReportsLength.Elogio}
 				/>
-				<ExclusionCategory
-					name='Outro'
+				<ExclusionCard
+					category='Outro'
 					color={theme => theme.colors.gray.main}
+					mySubmissions={groupedReports.Outro.length}
+					totalSubmissions={exclusionReportsLength.Elogio}
 				/>
 			</ExclusionCategoriesContainer>
 			<MainContent>
@@ -233,9 +293,17 @@ const FormPage: FormPageComponent = ({  }) => {
 						<TextArea name='message' placeholder='Por favor, descreva sua experiência...' />
 						<ControlArea>
 							<SelectContainer>
-								<StyledSelect onChange={setCategory} fullWidth options={SelectCategory} />
-								<StyledSelect onChange={setSource} fullWidth options={SelectFontes} />
-								<StyledCheckbox>
+								<StyledSelect
+									onChange={value => setCategory(value as ExclusionCategory)}
+									fullWidth
+									options={SelectCategory}
+								/>
+								<StyledSelect
+									onChange={value => setSource(value as ExclusionSource)}
+									fullWidth
+									options={SelectFontes}
+								/>
+								<StyledCheckbox onChange={setIsFirstJob}>
 									Este é o meu primeiro emprego, estágio ou programa de treinee.
 								</StyledCheckbox>
 							</SelectContainer>
