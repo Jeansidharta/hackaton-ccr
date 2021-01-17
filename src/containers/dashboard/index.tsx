@@ -1,6 +1,5 @@
 import React from 'react';
 import styled, { DefaultTheme } from 'styled-components';
-import { useLocalStorage } from '../../libs/hooks/use-local-storage';
 import { useReportsData } from './use-reports-data';
 
 const Root = styled.div`
