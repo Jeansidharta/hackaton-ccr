@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Button from '../../atoms/button';
-import { useMultistep } from '../../multistep-form/context';
+import { useMultistep } from '../../atoms/multistep-form/context';
 
 const Root = styled.div`
 	background-color: ${props => props.theme.colors.primary.main};

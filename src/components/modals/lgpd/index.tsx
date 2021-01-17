@@ -1,6 +1,6 @@
 import React from 'react';
 import { useModal } from '../../../contexts/modal';
-import MultistepForm from '../../multistep-form';
+import MultistepForm from '../../atoms/multistep-form';
 import Intro from './0-intro';
 import Gurantees1 from './1-guarantees';
 import Gurantees2 from './2-guarantees';
