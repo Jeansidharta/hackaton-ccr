@@ -1,19 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import LGPDModal from '../../components/modals/lgpd';
 import { useModal } from '../../contexts/modal';
-import { useLocalStorage } from '../../libs/hooks/use-local-storage';
 
 type LGPDModalServiceComponent = React.FunctionComponent;
 
 const LGPDModalService: LGPDModalServiceComponent = ({  }) => {
 	const { openModal } = useModal();
-	const [hasSeenLGPD, setHasSeenLGPD] = useLocalStorage('has-seen-lgpd-modal');
+	const [hasSeenLGPD, setHasSeenLGPD] = useState<boolean>(false);
 
 	React.useEffect(() => {
-		if (hasSeenLGPD === 'true') return;
+		if (hasSeenLGPD) return;
 
 		openModal(
-			<LGPDModal onSubmit={() => setHasSeenLGPD('true')} />,
+			<LGPDModal onSubmit={() => setHasSeenLGPD(true)} />,
 			{ backdropClickClose: false }
 		);
 	}, [hasSeenLGPD]);
