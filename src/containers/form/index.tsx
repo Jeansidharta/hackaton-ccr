@@ -1,5 +1,8 @@
+import { useRouter } from 'next/router';
 import React from 'react';
+import { toast } from 'react-toastify';
 import styled from 'styled-components';
+import usePostData from '../../api/post-data';
 import Button from '../../components/atoms/button';
 import Checkbox from '../../components/atoms/checkbox';
 import Select from '../../components/atoms/select';
@@ -124,6 +127,61 @@ type FormPageProps = React.PropsWithoutRef<{
 type FormPageComponent = React.FunctionComponent<FormPageProps>;
 
 const FormPage: FormPageComponent = ({  }) => {
+	const [category, setCategory] = React.useState<string | null>(null);
+	const [source, setSource] = React.useState<string | null>(null);
+
+	const [postData, { error, loading }] = usePostData({});
+
+	React.useEffect(() => {
+		if (error) toast.error(error.message);
+	}, [error]);
+
+	React.useEffect(() => {
+		router.prefetch('/confirmation');
+	}, []);
+
+	const router = useRouter();
+
+	function handleExit () {
+		router.push('/confirmation');
+	}
+
+	function validateData (message: string) {
+		const problems: string[] = [];
+
+		if (!category) problems.push('Você deve selecionar uma categoria');
+		if (!source) problems.push('Você deve selecionar uma fonte');
+		if (!message) problems.push('Você deve escrever uma mensagem');
+		if (message && message.length < 10) problems.push('Sua mensagem deve ser mais longa');
+
+		return problems;
+	}
+
+	function generateProblemsReactNode (problems: string[]) {
+		return <>
+			{problems.map(problem => <div key={problem}>{problem}</div>)}
+		</>;
+	}
+
+	async function handleSubmit (event: React.FormEvent<HTMLFormElement>) {
+		event.preventDefault();
+
+		const messageElem = (event.target as HTMLFormElement).message as HTMLTextAreaElement;
+		const message = messageElem.value;
+
+		const problems = validateData(message);
+
+		if (problems.length > 0) {
+			toast.error(generateProblemsReactNode(problems));
+			return;
+		}
+
+		const success = await postData({ message, source, category });
+		if (!success) return;
+
+		toast.success('Experiência enviada com sucesso!');
+	}
+
 	return (
 		<Root>
 			<ExclusionCategoriesContainer>
@@ -170,14 +228,14 @@ const FormPage: FormPageComponent = ({  }) => {
 					<StyledCheckbox>
 						Este é o meu primeiro emprego, estágio ou programa de treinee.
 					</StyledCheckbox>
-					<Form>
-						<TextArea placeholder='Por favor, descreva sua experiência...' />
+					<Form onSubmit={handleSubmit}>
+						<TextArea name='message' placeholder='Por favor, descreva sua experiência...' />
 						<ControlArea>
-							<StyledSelect fullWidth options={SelectCategory} />
-							<StyledSelect fullWidth options={SelectFontes} />
+							<StyledSelect onChange={setCategory} fullWidth options={SelectCategory} />
+							<StyledSelect onChange={setSource} fullWidth options={SelectFontes} />
 							<ActionButtonsContainer>
-								<ActionButton>Enviar</ActionButton>
-								<ActionButton>Sair</ActionButton>
+								<ActionButton type='submit' loading={loading}>Enviar</ActionButton>
+								<ActionButton type='button' onClick={handleExit}>Sair</ActionButton>
 							</ActionButtonsContainer>
 						</ControlArea>
 					</Form>
