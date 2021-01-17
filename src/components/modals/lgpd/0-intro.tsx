@@ -5,7 +5,7 @@ import { useMultistep } from '../../atoms/multistep-form/context';
 
 const Root = styled.div`
 	background-color: ${props => props.theme.colors.primary.main};
-	padding: 10px 40px;
+	padding: 10px 60px;
 	border-radius: 32px;
 	color: white;
 	text-align: center;
@@ -16,38 +16,45 @@ const Root = styled.div`
 	min-height: 100%;
 `;
 
-const HeaderContainer = styled.div`
+const TitleContainer = styled.div`
 
 `;
 
 const Title = styled.h1`
-	font-size: 170px;
-	margin: 0;
+	font-size: 100px;
+	margin: 0 0 32px 0;
 	font-weight: 700;
 `;
 
 const Subtitle = styled.p`
 	font-size: 18px;
-	margin-top: 0;
-	font-weight: 500;
+	margin: 0;
 `;
 
 const Paragraph = styled.p`
-	font-size: 16px;
+	font-size: 22px;
 	margin: 40px 0;
-	text-align: justify;
+	text-align: center;
+	font-weight: bold;
 	width: 100%;
-	max-width: 420px;
-	font-weight: 400;
 	line-height: 25px;
+	max-width: 420px;
 `;
 
 const ContinueButton = styled(Button)`
-	background-color: white;
 	font-size: 20px;
-	padding: 8px 32px;
-	margin: 0 auto 20px auto;
+	&& {
+		background-color: white;
+		padding: 8px 32px;
+	}
+	margin: 64px auto 20px auto;
 	font-weight: 500;
+`;
+
+const Padlock = styled.img.attrs({ src: '/icons/lock-white.svg', alt: '' })`
+	width: 48px;
+	height: 48px;
+	margin: 48px 0;
 `;
 
 type IntroProps = React.PropsWithoutRef<{
@@ -60,14 +67,17 @@ const Intro: IntroComponent = () => {
 
 	return (
 		<Root>
-			<HeaderContainer>
-				<Title>LGPD</Title>
-				<Subtitle>LEI GERAL DE PROTEÇÃO DE DADOS - nº 13.709/18</Subtitle>
-			</HeaderContainer>
 			<Paragraph>
-				Em vigor desde 18/09/2020, o seu direito à privacidade e à
-				proteção de dados pessoais está garantido conforme as normas da LGPD.
+				O seu direito à privacidade e à proteção de dados pessoais está garantido por lei.
 			</Paragraph>
+			<Padlock />
+			<TitleContainer>
+				<Title>LGPD</Title>
+				<Subtitle>
+					<strong>LEI GERAL DE PROTEÇÃO DE DADOS - nº 13.709/18</strong>
+				</Subtitle>
+				<Subtitle>Em vigor desde 18/09/2020</Subtitle>
+			</TitleContainer>
 			<ContinueButton onClick={nextStage}>Continuar</ContinueButton>
 		</Root>
 	);

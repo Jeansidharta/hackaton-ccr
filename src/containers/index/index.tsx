@@ -19,7 +19,7 @@ const Title = styled.h1`
 	margin-bottom: 60px;
 	margin-left: 5px;
 	margin-top: 0;
-	// margin-top: 70px;
+	color: ${props => props.theme.colors.primary.main};
 `;
 
 const Card = styled.div`
@@ -32,8 +32,11 @@ const Card = styled.div`
 
 const ContinueButton = styled(Button)`
 	margin: 47px 0 0 auto;
+	&& {
+		padding: 22px 66px;
+		background-color: white;
+	}
 	font-size: 36px;
-	padding: 22px 66px;
 `;
 
 const StyledSelect = styled(Select)`
@@ -65,7 +68,7 @@ const sexuality = [
 const gender = [
 	'mulher',
 	'homem',
-	'não-binátio',
+	'não-binário',
 	'outro',
 ];
 
