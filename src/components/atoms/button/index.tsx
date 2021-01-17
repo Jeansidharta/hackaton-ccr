@@ -28,12 +28,13 @@ type ButtonComponent = React.FunctionComponent<ButtonProps>;
 
 const Button: ButtonComponent = ({
 	children,
-	className,
 	loading,
 	spinnerSpacing = 12,
+	ref,
+	...props
 }) => {
 	return (
-		<Root className={className}>
+		<Root {...props}>
 			{children}
 			{ loading && <><Spacing style={{ width: spinnerSpacing }} /><Spinner /></> }
 		</Root>
