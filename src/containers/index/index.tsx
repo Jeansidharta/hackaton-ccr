@@ -142,12 +142,12 @@ const Index: IndexComponent = ({  }) => {
 		router.push('/form');
 	}
 
-	function handleSelectChange (dataKey: keyof FormData, value: string) {
+	function handleSelectChange (dataKey: keyof FormData, value: string | null) {
 		setData({ ...data, [dataKey]: value });
 	}
 
 	const makeHandler = (dataKey: keyof FormData) => {
-		return (value: string) => handleSelectChange(dataKey, value);
+		return (value: string | null) => handleSelectChange(dataKey, value);
 	};
 
 	const RaceSelect = <StyledSelect onChange={makeHandler('race')} options={race} />;
@@ -163,7 +163,7 @@ const Index: IndexComponent = ({  }) => {
 		<Root>
 			<Title>Antes de começarmos, nos conte um pouco sobre você?</Title>
 			<Card>
-				Eu me identifico como raça {RaceSelect}. Sou {SexualitySelect}
+				Eu me identifico racialmente como {RaceSelect}. Sou {SexualitySelect}
 				, {GenderSelect} e {TransgenderSelect}. Estou em {AgeGroupSelect} e
 				sou uma pessoa {DeficiencySelect} deficiências. Eu trabalho nesta empresa
 				há {WorkTimeSelect} ano(s), e o meu nível de satisfação com o trabalho
