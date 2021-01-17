@@ -7,6 +7,9 @@ import FilledThemeProvider from '../theme';
 import AppContainer from '../containers/_app';
 import Services from '../services';
 import Context from '../contexts';
+import { ToastContainer } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 type MyAppProps = React.PropsWithoutRef<{
 	Component: any,
@@ -45,6 +48,7 @@ const MyApp: MyAppComponent = ({ Component, pageProps }) => {
 			<FilledThemeProvider>
 				<Context>
 					<Services />
+					<ToastContainer hideProgressBar />
 					<AppContainer>
 						<Component {...pageProps} />
 					</AppContainer>
