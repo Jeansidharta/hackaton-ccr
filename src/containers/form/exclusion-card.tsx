@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { DefaultTheme } from 'styled-components';
+import { ExclusionCategory } from '../../models/exclusion-report';
 
 const Root = styled.div<{ colorSelector: (theme: DefaultTheme) => string }>`
 	color: white;
@@ -27,25 +28,29 @@ const Submission = styled.p`
 	margin: 4px 0;
 `;
 
-type ExclusionCategoryProps = React.PropsWithoutRef<{
-	name: string,
+type ExclusionCardProps = React.PropsWithoutRef<{
+	category: ExclusionCategory,
 	color: (theme: DefaultTheme) => string,
+	mySubmissions: number,
+	totalSubmissions: number,
 }>;
 
-type ExclusionCategoryComponent = React.FunctionComponent<ExclusionCategoryProps>;
+type ExclusionCardComponent = React.FunctionComponent<ExclusionCardProps>;
 
-const ExclusionCategory: ExclusionCategoryComponent = ({
+const ExclusionCard: ExclusionCardComponent = ({
 	color,
-	name
+	category,
+	mySubmissions,
+	totalSubmissions,
 }) => {
 	return (
 		<Root colorSelector={color}>
-			<Name>{name}</Name>
+			<Name>{category}</Name>
 			<Hr />
-			<Submission>Eu: 0</Submission>
-			<Submission>Total: 100</Submission>
+			<Submission>Eu: {mySubmissions}</Submission>
+			<Submission>Total: {totalSubmissions}</Submission>
 		</Root>
 	);
 }
 
-export default ExclusionCategory;
+export default ExclusionCard;
