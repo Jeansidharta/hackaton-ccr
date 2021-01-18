@@ -1,34 +1,53 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Projeto Hackaton CCR
 
-## Getting Started
+Este projeto foi desenvolvido para [hackaton](http://www.grupoccr.com.br/hackathonccr/) organizada pela [CCR](http://www.grupoccr.com.br/) iniciada em 16/01/2021. A proposta da hackaton é criar uma solução relacionada à diversidade e empregabilidade de jovens no mercado de trabalho.
 
-First, run the development server:
+## Sobre nossa solução
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+### Visão geral
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Este software é construído para coletar dados de colaboradores e empregados de uma empresa. Será enviado um link para toda a equipe da empresa que está sendo analisada. Cada pessoa deve preencher os formulários apropriadamente. Os dados preenchidos serão enviados para nós, para serem devidamente interpretados. Após devidamente entender esses dados e suas causas, vamos pode tomar decisões de como ajudar a empresa contratante a melhorar a sua diversidade, e consequentemente a efetividade.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### Tecnologias utilizadas
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+Este projeto foi construído com as seguintes tecnologias:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- [Next.js](https://nextjs.org/) - Framework de Server-side Rendering. Escolhida pela maior flexibilidade que essa ferramenta disponibiliza ao projeto em relação à alternativa (create-react-app).
 
-## Learn More
+- [React](https://reactjs.org/) - Biblioteca de componentização. Escolhida para acelerar o desenvolvimento, e facilitar a modularização do projeto
 
-To learn more about Next.js, take a look at the following resources:
+- [Styled components](https://styled-components.com/) - Biblioteca de estilização. Escolhida para facilitar a estilização dos componentes
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Typescript](https://www.typescriptlang.org/) - Transpilador que implementa tipagem em Javascript. Escolhido para documentar melhor o projeto, e dificultar a criaçào de bugs.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- [React toastify](https://github.com/fkhadra/react-toastify) - Biblioteca de componente de Toast.
 
-## Deploy on Vercel
+## A equipe por trás deste projeto
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Nós somos a equipe 125, composta pelos integrantes:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Adla Viana - Antropóloga, etnógrafa e pesquisadora
+- Maria Luiza Salvador - UX/UI designer
+- Jean Sidharta - Desenvolvedor web
+
+## Como executar este projeto
+
+### Pre-requisitos
+
+Você deve ter o [Node.js](https://nodejs.org/) e o NPM instalado.
+
+### Inicialização
+
+Primeiro, clone este projeto em uma pasta, e execute o comando `npm install` dentro da pasta do projeto, para instalar as depêndencias do projeto
+
+### Executando
+
+Para executar o projeto, execute `npm run dev` na pasta do projeto. Para abrir a página web, abra a seguinte URL em seu browser de preferência: [http://localhost:3000](http://localhost:3000).
+
+## Exemplo de fluxo
+
+Primeiro, os colaboradores/empregados receberão um link individual, que abrirá a página de formulário de informações ([http://localhost:3000](http://localhost:3000)). Os dados fornecidos pelo usuário serão enviados para o nosso banco de dados para serem tratados e analisados.
+
+Na nossa página de admin, nós (desenvolvedoroes e mantenedores da plataforma), e apenas nós, temos acesso a todas as respostas de todos os usuários. Nem os colaboradores e nem as empresas tem acesso à essas informações, apenas a equipe responsável pela análise desses dados. Essa página é a ([http://localhost:3000/admin](http://localhost:3000/admin))
+
+A empresa em sí terá acesso a uma tabela com um resumo simplificado dos dados, garantindo a segurança e privacidade das pessoas que responderam os formulários.Essa página é a ([http://localhost:3000/dashboard](http://localhost:3000/dashboard))
