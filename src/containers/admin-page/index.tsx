@@ -83,10 +83,12 @@ const AdminPage: AdminPageComponent = ({  }) => {
 			<MainContainer>
 				<FilterContainer>
 					<Filter
+						title='Categorias'
 						options={ExclusionCategory}
 						onChange={setCategoryFilter}
 					/>
 					<Filter
+						title='Fontes'
 						options={ExclusionSource}
 						onChange={setSourceFilter}
 					/>

@@ -26,6 +26,7 @@ const RadioContainer = styled.div<{ colorSelector: (theme: DefaultTheme) => stri
 type FilterProps = React.PropsWithoutRef<{
 	options: readonly string[];
 	onChange?: (newValue: string) => void,
+	title: string;
 }>;
 
 type FilterComponent = React.FunctionComponent<FilterProps>;
@@ -33,6 +34,7 @@ type FilterComponent = React.FunctionComponent<FilterProps>;
 const Filter: FilterComponent = ({
 	options,
 	onChange = () => {},
+	title,
 }) => {
 	function  handleRadioChange (option: string) {
 		onChange(option);
@@ -40,11 +42,11 @@ const Filter: FilterComponent = ({
 
 	return (
 		<Root>
-			<Title>Categorias</Title>
+			<Title>{title}</Title>
 			{options.map(option => (
 				<RadioContainer colorSelector={theme => exclusionCategory2Color(theme, option as ExclusionCategory) || theme.colors.primary.main}>
 					<Radio
-						name={option}
+						name='filter'
 						onChange={value => value && handleRadioChange(option)}
 					>
 						{option}
