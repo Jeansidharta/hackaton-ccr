@@ -6,7 +6,7 @@ Este projeto foi desenvolvido para [hackaton](http://www.grupoccr.com.br/hackath
 
 ### Visão geral
 
-Este software é construído para coletar dados de colaboradores e empregados de uma empresa. Será enviado um link para toda a equipe da empresa que está sendo analisada. Cada pessoa deve preencher os formulários apropriadamente. Os dados preenchidos serão enviados para nós, para serem devidamente interpretados. Após devidamente entender esses dados e suas causas, vamos pode tomar decisões de como ajudar a empresa contratante a melhorar a sua diversidade, e consequentemente a efetividade.
+Este software é construído para coletar dados de colaboradores e empregados de uma empresa. Será enviado um link para toda a equipe da empresa que está sendo analisada. Cada pessoa deve preencher os formulários apropriadamente. Os dados preenchidos serão enviados para nós, para serem devidamente interpretados. Após devidamente entender esses dados e suas causas, vamos pode tomar decisões de como ajudar a empresa contratante a melhorar a sua diversidade, e consequentemente a efetividade. As empresas terão acesso a um dashboard, que mostra uma visão geral dos dados que foram coletados, tendo o cuidado de anonimizar esses dados para que não seja identificado quem respondeu o que.
 
 ### Tecnologias utilizadas
 
@@ -24,11 +24,11 @@ Este projeto foi construído com as seguintes tecnologias:
 
 ## A equipe por trás deste projeto
 
-Nós somos a equipe 125, composta pelos integrantes:
+Nós somos a equipe número 125, composta pelos integrantes:
 
-- Adla Viana - Antropóloga, etnógrafa e pesquisadora
-- Maria Luiza Salvador - UX/UI designer
-- Jean Sidharta - Desenvolvedor web
+- **Adla Viana** - Antropóloga, etnógrafa e pesquisadora
+- **Maria Luiza Salvador** - UX/UI designer
+- **Jean Sidharta** - Desenvolvedor web
 
 ## Como executar este projeto
 
