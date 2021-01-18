@@ -48,7 +48,7 @@ const ColorStrip = styled.div<{ colorSelector: (theme: DefaultTheme) => string }
 const BodyMessage = styled.p`
 	padding: 16px;
 	margin: 0;
-	min-height: 100%;
+	height: 180px;
 	width: 100%;
 	overflow: auto;
 `;

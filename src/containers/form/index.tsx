@@ -139,6 +139,8 @@ const FormPage: FormPageComponent = ({  }) => {
 	const [source, setSource] = React.useState<ExclusionSource | null>(null);
 	const [isFirstJob, setIsFirstJob] = React.useState<boolean>(false);
 
+	const formRef = React.useRef<HTMLFormElement | null>(null);
+
 	const [postData, { error, loading }] = usePostData({});
 	const {
 		exclusionReports,
@@ -205,6 +207,7 @@ const FormPage: FormPageComponent = ({  }) => {
 		addReportTo(report.category, report.source);
 		setExclusionReports([...exclusionReports, report ]);
 		toast.success('Experiência enviada com sucesso!');
+		formRef.current?.reset();
 	}
 
 	return (
@@ -260,7 +263,7 @@ const FormPage: FormPageComponent = ({  }) => {
 				<Card>
 					<CardTitle>Relato pessoal</CardTitle>
 					<Hr />
-					<Form onSubmit={handleSubmit}>
+					<Form ref={formRef} onSubmit={handleSubmit}>
 						<TextArea name='message' placeholder='Por favor, descreva sua experiência...' />
 						<ControlArea>
 							<SelectContainer>
