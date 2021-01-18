@@ -16,6 +16,7 @@ const Root = styled.div`
 
 const Header = styled.div`
 	padding: 8px;
+	position: relative;
 `;
 
 const Category = styled.p`
@@ -52,6 +53,15 @@ const BodyMessage = styled.p`
 	overflow: auto;
 `;
 
+const FirstJobStar = styled.span.attrs({ children: '*' })`
+	font-size: 40px;
+	position: absolute;
+	right: 8px;
+	bottom: -16px;
+	color: ${props => props.theme.colors.primary.main};
+	user-select: none;
+`;
+
 type CardProps = React.PropsWithoutRef<{
 	report: ExclusionReport,
 }>;
@@ -66,6 +76,7 @@ const Card: CardComponent = ({
 			<Header>
 				<Category><strong>Em: </strong>{report.category}</Category>
 				<Source><strong>De: </strong>{report.source}</Source>
+				{ report.isFirstJob && <FirstJobStar /> }
 			</Header>
 			<Hr />
 			<Body>
