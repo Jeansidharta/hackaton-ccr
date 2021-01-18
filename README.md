@@ -2,6 +2,8 @@
 
 Este projeto foi desenvolvido para [hackaton](http://www.grupoccr.com.br/hackathonccr/) organizada pela [CCR](http://www.grupoccr.com.br/) iniciada em 16/01/2021. A proposta da hackaton é criar uma solução relacionada à diversidade e empregabilidade de jovens no mercado de trabalho.
 
+**Essa solução está disponível publicamente neste link: [https://hackaton-ccr-125.netlify.app/](https://hackaton-ccr-125.netlify.app/)**
+
 ## Sobre nossa solução
 
 ### Visão geral
