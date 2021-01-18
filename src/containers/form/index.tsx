@@ -258,7 +258,7 @@ const FormPage: FormPageComponent = ({  }) => {
 					desejar.
 				</HeaderText>
 				<Card>
-					<CardTitle>Experiência pessoal</CardTitle>
+					<CardTitle>Relato pessoal</CardTitle>
 					<Hr />
 					<Form onSubmit={handleSubmit}>
 						<TextArea name='message' placeholder='Por favor, descreva sua experiência...' />
