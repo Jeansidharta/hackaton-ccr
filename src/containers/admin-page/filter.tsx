@@ -7,6 +7,7 @@ import { ExclusionCategory } from '../../models/exclusion-report';
 const Root = styled.form`
 	width: 272px;
 	background-color: white;
+	margin-bottom: 32px;
 `;
 
 const Title = styled.p`
@@ -26,6 +27,7 @@ const RadioContainer = styled.div<{ colorSelector: (theme: DefaultTheme) => stri
 type FilterProps = React.PropsWithoutRef<{
 	options: readonly string[];
 	onChange?: (newValue: string) => void,
+	isCategory?: boolean;
 	title: string;
 }>;
 
@@ -34,6 +36,7 @@ type FilterComponent = React.FunctionComponent<FilterProps>;
 const Filter: FilterComponent = ({
 	options,
 	onChange = () => {},
+	isCategory = false,
 	title,
 }) => {
 	function  handleRadioChange (option: string) {
@@ -44,7 +47,7 @@ const Filter: FilterComponent = ({
 		<Root>
 			<Title>{title}</Title>
 			{options.map(option => (
-				<RadioContainer colorSelector={theme => exclusionCategory2Color(theme, option as ExclusionCategory) || theme.colors.primary.main}>
+				<RadioContainer colorSelector={theme => isCategory ? exclusionCategory2Color(theme, option as ExclusionCategory) : theme.colors.primary.main}>
 					<Radio
 						name='filter'
 						onChange={value => value && handleRadioChange(option)}

@@ -86,6 +86,7 @@ const AdminPage: AdminPageComponent = ({  }) => {
 						title='Categorias'
 						options={ExclusionCategory}
 						onChange={setCategoryFilter}
+						isCategory
 					/>
 					<Filter
 						title='Fontes'
